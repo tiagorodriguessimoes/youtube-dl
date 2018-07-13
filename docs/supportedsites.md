@@ -290,7 +290,6 @@
  - **Foxgay**
  - **foxnews**: Fox News and Fox Business Video
  - **foxnews:article**
- - **foxnews:insider**
  - **FoxSports**
  - **france2.fr:generation-what**
  - **FranceCulture**
@@ -303,6 +302,9 @@
  - **Freesound**
  - **freespeech.org**
  - **FreshLive**
+ - **FrontendMasters**
+ - **FrontendMastersCourse**
+ - **FrontendMastersLesson**
  - **Funimation**
  - **FunkChannel**
  - **FunkMix**
@@ -590,7 +592,9 @@
  - **NRKSkole**: NRK Skole
  - **NRKTV**: NRK TV and NRK Radio
  - **NRKTVDirekte**: NRK TV Direkte and NRK Radio Direkte
+ - **NRKTVEpisode**
  - **NRKTVEpisodes**
+ - **NRKTVSeason**
  - **NRKTVSeries**
  - **ntv.ru**
  - **Nuvid**
@@ -814,6 +818,7 @@
  - **StretchInternet**
  - **SunPorno**
  - **SVT**
+ - **SVTPage**
  - **SVTPlay**: SVT Play and Öppet arkiv
  - **SVTSeries**
  - **SWRMediathek**

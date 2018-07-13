@@ -52,6 +52,7 @@ from ..utils import (
     GeoUtils,
     int_or_none,
     js_to_json,
+    JSON_LD_RE,
     mimetype2ext,
     orderedSet,
     parse_codecs,
@@ -1149,8 +1150,7 @@ class InfoExtractor(object):
 
     def _search_json_ld(self, html, video_id, expected_type=None, **kwargs):
         json_ld = self._search_regex(
-            r'(?s)<script[^>]+type=(["\'])application/ld\+json\1[^>]*>(?P<json_ld>.+?)</script>',
-            html, 'JSON-LD', group='json_ld', **kwargs)
+            JSON_LD_RE, html, 'JSON-LD', group='json_ld', **kwargs)
         default = kwargs.get('default', NO_DEFAULT)
         if not json_ld:
             return default if default is not NO_DEFAULT else {}
@@ -2106,7 +2106,21 @@ class InfoExtractor(object):
                         representation_ms_info = extract_multisegment_info(representation, adaption_set_ms_info)
 
                         def prepare_template(template_name, identifiers):
-                            t = representation_ms_info[template_name]
+                            tmpl = representation_ms_info[template_name]
+                            # First of, % characters outside $...$ templates
+                            # must be escaped by doubling for proper processing
+                            # by % operator string formatting used further (see
+                            # https://github.com/rg3/youtube-dl/issues/16867).
+                            t = ''
+                            in_template = False
+                            for c in tmpl:
+                                t += c
+                                if c == '$':
+                                    in_template = not in_template
+                                elif c == '%' and not in_template:
+                                    t += c
+                            # Next, $...$ templates are translated to their
+                            # %(...) counterparts to be used with % operator
                             t = t.replace('$RepresentationID$', representation_id)
                             t = re.sub(r'\$(%s)\$' % '|'.join(identifiers), r'%(\1)d', t)
                             t = re.sub(r'\$(%s)%%([^$]+)\$' % '|'.join(identifiers), r'%(\1)\2', t)
@@ -2437,6 +2451,8 @@ class InfoExtractor(object):
                         media_info['subtitles'].setdefault(lang, []).append({
                             'url': absolute_url(src),
                         })
+            for f in media_info['formats']:
+                f.setdefault('http_headers', {})['Referer'] = base_url
             if media_info['formats'] or media_info['subtitles']:
                 entries.append(media_info)
         return entries

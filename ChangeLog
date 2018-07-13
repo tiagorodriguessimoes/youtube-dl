@@ -1,3 +1,52 @@
+version 2018.07.10
+
+Core
+* [utils] Share JSON-LD regular expression
+* [downloader/dash] Improve error handling (#16927)
+
+Extractors
++ [nrktv] Add support for new season and serie URL schema
++ [nrktv] Add support for new episode URL schema (#16909)
++ [frontendmasters] Add support for frontendmasters.com (#3661, #16328)
+* [funk] Fix extraction (#16918)
+* [watchbox] Fix extraction (#16904)
+* [dplayit] Sort formats
+* [dplayit] Fix extraction (#16901)
+* [youtube] Improve login error handling (#13822)
+
+
+version 2018.07.04
+
+Core
+* [extractor/common] Properly escape % in MPD templates (#16867)
+* [extractor/common] Use source URL as Referer for HTML5 entries (16849)
+* Prefer ffmpeg over avconv by default (#8622)
+
+Extractors
+* [pluralsight] Switch to graphql (#16889, #16895, #16896, #16899)
+* [lynda] Simplify login and improve error capturing (#16891)
++ [go90] Add support for embed URLs (#16873)
+* [go90] Detect geo restriction error and pass geo verification headers
+  (#16874)
+* [vlive] Fix live streams extraction (#16871)
+* [npo] Fix typo (#16872)
++ [mediaset] Add support for new videos and extract all formats (#16568)
+* [dctptv] Restore extraction based on REST API (#16850)
+* [svt] Improve extraction and add support for pages (#16802)
+* [porncom] Fix extraction (#16808)
+
+
+version 2018.06.25
+
+Extractors
+* [joj] Relax URL regular expression (#16771)
+* [brightcove] Workaround sonyliv DRM protected videos (#16807)
+* [motherless] Fix extraction (#16786)
+* [itv] Make SOAP request non fatal and extract metadata from webpage (#16780)
+- [foxnews:insider] Remove extractor (#15810)
++ [foxnews] Add support for iframe embeds (#15810, #16711)
+
+
 version 2018.06.19
 
 Core
